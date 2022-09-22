@@ -1,10 +1,14 @@
 let http = require('http');
 let filesystem = require('fs');
 let dt = require('./module/Date');
-let fName = require('./module/Name');
+// let fName = require('./module/Name');
+let url = require('url');
 let fakeUrl = "http://www.luke.com:80/home.html?byear=1990&month=01";
 
 http.createServer((req,res)=>{
+    let parsedUrl = url.parse(req.url,true);
+    console.log(parsedUrl.pathname);
+    console.log(parsedUrl.query);
     // res.writeHead(200,{'Content-Type':'text/html'});
     // filesystem.writeFile('./files/newText.txt','\n File created by Node Server. new line',(err)=>{
     //     if(err) throw err;
@@ -14,7 +18,7 @@ http.createServer((req,res)=>{
         if(err) throw err;
         console.log("Saved");
     });
-    
+
     filesystem.readFile('./pages/home.html',(err,data)=>{
         res.writeHead(200,{'Content-Type':'text/html'});
         res.write(data);
