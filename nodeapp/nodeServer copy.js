@@ -4,7 +4,7 @@ let dt = require('./module/Date');
 // let fName = require('./module/Name');
 let url = require('url');
 let fakeUrl = "http://www.luke.com:80/home.html?byear=1990&month=01";
-// let fileUrl = "http://localhost:8080?file=myname&data1=luke&file2=mycounrty&data2=korea"
+// let fileUrl = "http://localhost:8080?file=myname&data1=luke&file2=mycounrtyname&data2=korea"
 
 http.createServer((req,res)=>{
     if(req.url==="/favicon.ico") res.end();
@@ -16,11 +16,27 @@ http.createServer((req,res)=>{
     let file2 = query.file2;
     let data1 = query.data1;
     let data2 = query.data2;
-    // let filename = parsedUrl.pathname +"."+ query.type;
+    let filename = parsedUrl.pathname +"."+ query.type;
     // console.log(parsedUrl.query);
-    // console.log(filename);
+    console.log(filename);
     // console.log(parsedUrl.pathname);
-    
+    if(!filesystem.existsSync("./page"+filename)){
+        filesystem.writeFile('./files/'+filename,'test',(err)=>{
+            if(err){
+                throw err;
+                // return res.end();
+            }
+            console.log("Saved");
+        })
+
+    }else{
+            filesystem.readFile('./files/'+filename,(err,data)=>{
+                res.writeHead(200,{'Content-Type':'text/html'});
+                res.write("<h1>"+data+"</h1>");
+                return res.end();
+            });
+    }
+
     if(file != null){
     
             filesystem.writeFile('./files/'+file+'.txt',''+data1+'',(err)=>{
