@@ -1,0 +1,20 @@
+{
+  "name": "demoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nodeServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node nodeServer.js",
+    "dev": "nodemon nodeServer.js",
+    "serve": "nodemon nodeServer.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "formidable": "^2.0.1",
+    "mysql": "^2.18.1"
+  }
+}
